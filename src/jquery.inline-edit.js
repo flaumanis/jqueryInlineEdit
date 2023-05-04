@@ -22,6 +22,8 @@
         },
         //Css class when hover on editable item
         hoverClass: 'hover',
+        //Css class for the input field or textarea when focus
+        activeCssClass: 'inlineEdit_active',
         //Show or hide counter in case set max length
         showCounter: false,
         //Input type, textarea or input type text
@@ -103,6 +105,11 @@
             for (var i in properties) {
                 css[properties[i]] = $this.css(properties[i]);
             }
+
+            if(options.activeCssClass) {
+                $replaceWith.addClass(options.activeCssClass);
+            }
+
             if(options.defaultText) {
                 options.defaultText = false;
                 $replaceWith.val($element.text().trim());
@@ -114,6 +121,8 @@
             if (options.inputType == 'textarea' && $().autosize) {
                 $replaceWith.autosize();
             }
+
+
             $this.hide();
             $this.after($counter.text($connectWith.val().length + "/" + options.maxLength));
             $this.after($replaceWith);
